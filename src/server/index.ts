@@ -3,13 +3,8 @@ import express from 'express';
 const app = express();
 
 const PORT: number = 3020;
-<<<<<<< HEAD
-const BASE_URL: string = `http://localhost:${PORT}`;
-const links: string[] = [`${BASE_URL}/add`, `${BASE_URL}/subtract`, `${BASE_URL}/multiply`, `${BASE_URL}/divide`];
-=======
 const BASE_URL: string = `https://calculator.adamlass.com`;
 const links = [`${BASE_URL}/add`, `${BASE_URL}/subtract`, `${BASE_URL}/multiply`, `${BASE_URL}/divide`];
->>>>>>> a5d56183597def912f3e456f4e1efe07b690ad6d
 
 app.use(express.json());
 

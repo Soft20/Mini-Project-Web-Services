@@ -32,7 +32,7 @@ def run():
 
 
 def rest_client(operation, value_a, value_b):
-    base_url = 'http://localhost:3020'
+    base_url = 'https://calculator.adamlass.com'
     response = requests.post(f'{base_url}/{operation.lower()}', json={"value_a": int(value_a), "value_b": int(value_b)})
     # print(response.json()['links'])
     result = response.json()['result']
