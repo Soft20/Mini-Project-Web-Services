@@ -32,7 +32,11 @@ def run():
 
 
 def rest_client(operation, value_a, value_b):
-    return ""
+    base_url = 'http://localhost:3020'
+    response = requests.post(f'{base_url}/{operation.lower()}', json={"value_a": int(value_a), "value_b": int(value_b)})
+    # print(response.json()['links'])
+    result = response.json()['result']
+    return result
 
 
 def soap_client(operation, value_a, value_b):

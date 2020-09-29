@@ -9,9 +9,8 @@ Stephan Djurhuus
 ## Objectives
 The task is to create an application, which takes use of web services.
 The application has minimum three components:
-- [ ] SOAP service
-- [ ] RESTful service
-- [ ] Client application, which consumes the services.
+- [x] RESTful service
+- [x] Client application, which consumes the services.
 
 At least one of the web services, as well as the web services consumer must be originally developed by you/your team, while the others can be requested from public sources.
 
@@ -21,12 +20,35 @@ Prepare demonstration of the implementation.
 [extended description](https://datsoftlyngby.github.io/soft2020fall/resources/473f0f56-MP1-WS.pdf)
 
 ## Content
+* [Technical Features](#technical-features)
 * [Prerequisite](#prerequisite)
 * [Installation](#installation)
 * [Execution](#execution)
 
+## Technical Features
+### Summary
+This project consist of a REST server written in TypeScript, and a client written in python.
+
+The client uses our own REST Web Service and an external SOAP Web Service. The client can request different calculation operations to both services, where both response with and answer.
+
+The REST Service also returns a list of all available urls as an attribute called `links`.
+
+We selected Python and TypeScript to show the integration between to programing languages.
+
+### Business Case
+Our business case is to create two calculator services, the first using SOAP and second using REST.
+
+The client has the option to select the type of service through the terminal, followed by selecting the operation type, and the values needed for the calculation.
+
+The following operations are available:
+* `Add`
+* `Subtract`
+* `Multiply`
+* `Divide`
+
 ## Prerequisite
 
+**Server**
 * [node.js](https://nodejs.org/en/)
 * [yarn](https://www.npmjs.com/package/yarn)
 
@@ -36,25 +58,30 @@ Prepare demonstration of the implementation.
 npm install -g yarn
 ```
 
+**Client**
+* [python](https://www.python.org/)
+* [inquirer](https://pypi.org/project/inquirer/)
+* [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
+
 ## Installation
+
+**Server**
 ```bash
 yarn install
 ```
 
+**Client**  
+This solution only needs the libraries install from the [Prerequisite](#prerequisite) above.
+
 ## Execution
 `ctr + c` to terminate services.
 
-**SOAP Server**
+**Server**
 ```bash
-yarn start soap
-```
-
-**REST Server**
-```bash
-yarn start rest
+yarn start
 ```
 
 **Client**
 ```bash
-yarn start client
+python src/client/app.py
 ```

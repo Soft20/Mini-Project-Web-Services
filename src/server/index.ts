@@ -2,9 +2,9 @@ import express from 'express';
 
 const app = express();
 
-const PORT: number = 3000;
+const PORT: number = 3020;
 const BASE_URL: string = `http://localhost:${PORT}`;
-const links = [`${BASE_URL}/add`, `${BASE_URL}/subtract`, `${BASE_URL}/multiply`, `${BASE_URL}/divide`];
+const links: string[] = [`${BASE_URL}/add`, `${BASE_URL}/subtract`, `${BASE_URL}/multiply`, `${BASE_URL}/divide`];
 
 app.use(express.json());
 
