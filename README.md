@@ -33,7 +33,8 @@ The client uses our own REST Web Service and an external SOAP Web Service. The c
 
 The REST Service also returns a list of all available urls as an attribute called `links`.
 
-We selected Python and TypeScript to show the integration between to programing languages.
+We selected Python and TypeScript to show the usage and integration between multiple programing languages. 
+
 
 ### Business Case
 Our business case is to create two calculator services, the first using SOAP and second using REST.
