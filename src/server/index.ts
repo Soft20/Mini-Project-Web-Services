@@ -3,7 +3,7 @@ import express from 'express';
 const app = express();
 
 const PORT: number = 3020;
-const BASE_URL: string = `http://localhost:${PORT}`;
+const BASE_URL: string = `https://calculator.adamlass.com`;
 const links = [`${BASE_URL}/add`, `${BASE_URL}/subtract`, `${BASE_URL}/multiply`, `${BASE_URL}/divide`];
 
 app.use(express.json());
