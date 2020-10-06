@@ -47,6 +47,8 @@ The following operations are available:
 * `Multiply`
 * `Divide`
 
+As an extension our REST service provides an endpoint for making CRUD operations for handling your favorite number. This is done by using the URI: `\favorite` with the http methods `GET`, `POST`, `PUT` & `DELETE`.
+
 ### RESTfulness
 
 #### Architectural Constraints
