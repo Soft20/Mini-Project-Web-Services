@@ -9,6 +9,7 @@ Stephan Djurhuus
 ## Objectives
 The task is to create an application, which takes use of web services.
 The application has minimum three components:
+- [x] SOAP service
 - [x] RESTful service
 - [x] Client application, which consumes the services.
 
