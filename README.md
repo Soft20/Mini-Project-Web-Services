@@ -47,6 +47,70 @@ The following operations are available:
 * `Multiply`
 * `Divide`
 
+### RESTfulness
+
+#### Architectural Constraints
+
+- [x] Client-server architecture
+Server and client are separated and connected with the servers api.
+<br>
+
+- [x] Statelessness
+The server is stateless, the client cant store any content the server. Our server uses a json file as a proxy database to avoid storing content on the server.
+<br>
+
+- [x] Cacheability
+This can be obtained though the response header `Cache-control`.
+<br>
+
+- [x] Layered system
+Not a part of our business case, the could be solve by calling the SOAP service through our own server. This helps the consumer by only using one web service.
+<br>
+
+- [ ] Code on demand (optional)
+_Not a part of our business case._
+
+##### Uniform interface
+- [x] Resource identification in requests
+Our URIs identifies the targeted resource.
+<br>
+
+- [x] Resource manipulation through representations
+Our `/favorite` uri consist of the four CRUD operations as http methods `GET`, `POST`, `PUT` & `DELETE`.
+<br>
+
+- [x] Self-descriptive messages
+For each response a Self-descriptive message is provided to the client for better understanding.
+<br>
+
+- [x] Hypermedia as the engine of application state (HATEOAS)
+Our response contains a list called `_links` containing available URIs. Our use case wasn't the best for showing the feature. A better use case could be a movie service, where a movies could link to the actors in it, and actors could link to the movies they have acted in.
+<br>
+
+_HATEOAS example_
+```typescript
+response = {
+    // response body...
+
+    _links = {
+        favorite: [
+            { href: '/favorite', rel: 'Get favorite number', method: 'GET' },
+            { href: '/favorite', rel: 'Create favorite number', method: 'POST' },
+            { href: '/favorite', rel: 'Update favorite number', method: 'PUT' },
+            { href: '/favorite', rel: 'Delete favorite number', method: 'DELETE' },
+        ],
+
+        calculator: [
+            { href: '/add', rel: 'Number addition', method: 'POST' },
+            { href: '/subtract', rel: 'Number subtraction', method: 'POST' },
+            { href: '/multiply', rel: 'Number multiplication', method: 'POST' },
+            { href: '/divide', rel: 'Number division', method: 'POST' },
+        ],
+    }
+};
+```
+
+
 ## Prerequisite
 
 #### Server

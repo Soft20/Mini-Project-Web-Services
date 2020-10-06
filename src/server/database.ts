@@ -1,9 +1,41 @@
-import fs from "fs";
+import fs from 'fs';
 
-fs.readFile("src/database/database.json", (err, data: any) => {
-  if (err) throw err;
-  let database = JSON.parse(data);
-  console.log(database);
-});
+function readFavoriteNumber(): number | null {
+	const data = fs.readFileSync('src/database/database.json', 'utf8');
+	const json = JSON.parse(data);
+	return json.number || null;
+}
 
-console.log("This is after the read call");
+export function getFavoriteNumber(): number {
+	const number = readFavoriteNumber();
+
+	if (number) {
+		return number;
+	} else {
+		throw new Error("Can't get non-existing number.");
+	}
+}
+
+export function createFavoriteNumber(number: number): void {
+	if (!readFavoriteNumber()) {
+		fs.writeFileSync('src/database/database.json', `{ "number": ${number} }`);
+	} else {
+		throw new Error("Can't create already existing number.");
+	}
+}
+
+export function updateFavoriteNumber(number: number): void {
+	if (readFavoriteNumber()) {
+		fs.writeFileSync('src/database/database.json', `{ "number": ${number} }`);
+	} else {
+		throw new Error("Can't update non-existing number.");
+	}
+}
+
+export function deleteFavoriteNumber(): void {
+	if (readFavoriteNumber()) {
+		fs.writeFileSync('src/database/database.json', '{}');
+	} else {
+		throw new Error("Can't delete non-existing number.");
+	}
+}

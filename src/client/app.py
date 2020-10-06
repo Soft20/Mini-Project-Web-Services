@@ -3,6 +3,9 @@ import inquirer
 from bs4 import BeautifulSoup
 import platform
 import sys
+from pprint import pprint
+
+HATEOAS = False
 
 # rest_url = 'https://calculator.adamlass.com'
 rest_url = 'http://localhost:3020'
@@ -39,8 +42,6 @@ method_options = [
 
 
 def run():
-    print(f'System platform {getOS()}')
-
     service_selection = inquirer.prompt(service_options)
     service = service_selection['service']
 
@@ -73,7 +74,9 @@ def run():
     else:
         sys.exit()
 
-    print(f'{operator} result::', result)
+    print('-' * 50)
+    print('response::', result)
+    print('-' * 50, '\n')
 
 
 def get_values():
@@ -86,8 +89,13 @@ def get_values():
 def rest_client(operation, value_a, value_b):
     response = requests.post(f'{rest_url}/{operation.lower()}',
                              json={"value_a": int(value_a), "value_b": int(value_b)})
-    # print(response.json()['links'])
+    if HATEOAS:
+        pprint('HATEOAS', response.json()['_links'])
     result = response.json()['result']
+
+    print('status code::', response.status_code)
+    print('headers::', response.headers)
+    print('url::', response.url, '\n')
     return result
 
 
@@ -103,8 +111,15 @@ def rest_client_favorite(method, value=None):
     else:
         response = requests.get(f'{rest_url}/favorite')
 
-    # print(response.json()['links'])
+    if HATEOAS:
+        pprint('HATEOAS', response.json()['_links'])
+
     result = response.json()['result']
+
+    print('status code::', response.status_code)
+    print('headers::', response.headers)
+    print('url::', response.url, '\n')
+
     return result
 
 
@@ -142,5 +157,6 @@ def getOS():
 
 
 if __name__ == '__main__':
+    print(f'System platform {getOS()} \n')
     while True:
         run()
