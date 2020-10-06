@@ -49,7 +49,7 @@ The following operations are available:
 
 ## Prerequisite
 
-**Server**
+#### Server
 * [node.js](https://nodejs.org/en/)
 * [yarn](https://www.npmjs.com/package/yarn)
 
@@ -59,16 +59,16 @@ The following operations are available:
 npm install -g yarn
 ```
 
-**Client**
+#### Client
 * [Python3](https://www.python.org/downloads/)
 
 ## Installation
-**Server**
+#### Server
 ```bash
 yarn install
 ```
 
-**Client**
+#### Client
 [inquirer](https://pypi.org/project/inquirer/)
 ```bash
 pip install inquirer
@@ -87,12 +87,12 @@ pip install lxml
 ## Execution
 `ctr + c` to terminate services.
 
-**Server**
+#### Server
 ```bash
 yarn start
 ```
 
-**Client**
+#### Client
 ```bash
 python src/client/app.py
 ```
