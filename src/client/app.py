@@ -2,20 +2,38 @@ import requests
 import inquirer
 from bs4 import BeautifulSoup
 import platform
-
+import sys
 
 # rest_url = 'https://calculator.adamlass.com'
 rest_url = 'http://localhost:3020'
 soap_url = 'http://www.dneonline.com/calculator.asmx'
 
-options = [
+service_options = [
     inquirer.List('service',
                   message='Select Web Service?',
-                  choices=['REST', 'SOAP'],
+                  choices=['REST', 'SOAP', 'EXIT'],
                   ),
+]
+
+soap_options = [
     inquirer.List('operator',
                   message='Select Operator?',
                   choices=['Add', 'Subtract', 'Multiply', 'Divide'],
+                  ),
+]
+
+rest_options = [
+    inquirer.List('operator',
+                  message='Select Operator?',
+                  choices=['Add', 'Subtract',
+                           'Multiply', 'Divide', 'Favorite'],
+                  ),
+]
+
+method_options = [
+    inquirer.List('method',
+                  message='Select HTTP method?',
+                  choices=['GET', 'POST', 'PUT', 'DELETE'],
                   ),
 ]
 
@@ -23,24 +41,68 @@ options = [
 def run():
     print(f'System platform {getOS()}')
 
-    selections = inquirer.prompt(options)
-    service = selections['service']
-    operation = selections['operator']
+    service_selection = inquirer.prompt(service_options)
+    service = service_selection['service']
 
+    if service == 'REST':
+        operator_selection = inquirer.prompt(rest_options)
+        operator = operator_selection['operator']
+
+        if operator == 'Favorite':
+            method_selection = inquirer.prompt(method_options)
+            method = method_selection['method']
+
+            if method in ['POST', 'PUT']:
+                value = input('new favorite number: ')
+                result = rest_client_favorite(method, value)
+
+            else:
+                result = rest_client_favorite(method)
+
+        else:
+            value_a, value_b = get_values()
+            result = rest_client(operator, value_a, value_b)
+
+    elif service == 'SOAP':
+        operator_selection = inquirer.prompt(soap_options)
+        operator = operator_selection['operator']
+
+        value_a, value_b = get_values()
+        result = soap_client(operator, value_a, value_b)
+
+    else:
+        sys.exit()
+
+    print(f'{operator} result::', result)
+
+
+def get_values():
     value_a = input('first value: ')
     value_b = input('second value: ')
     print()
-
-    if service == 'REST':
-        result = rest_client(operation, value_a, value_b)
-    else:
-        result = soap_client(operation, value_a, value_b)
-
-    print(f'{operation} result::', result)
+    return value_a, value_b
 
 
 def rest_client(operation, value_a, value_b):
-    response = requests.post(f'{rest_url}/{operation.lower()}', json={"value_a": int(value_a), "value_b": int(value_b)})
+    response = requests.post(f'{rest_url}/{operation.lower()}',
+                             json={"value_a": int(value_a), "value_b": int(value_b)})
+    # print(response.json()['links'])
+    result = response.json()['result']
+    return result
+
+
+def rest_client_favorite(method, value=None):
+    if method == 'POST':
+        response = requests.post(
+            f'{rest_url}/favorite', json={"value": int(value)})
+    elif method == 'PUT':
+        response = requests.put(
+            f'{rest_url}/favorite', json={"value": int(value)})
+    elif method == 'DELETE':
+        response = requests.delete(f'{rest_url}/favorite')
+    else:
+        response = requests.get(f'{rest_url}/favorite')
+
     # print(response.json()['links'])
     result = response.json()['result']
     return result
@@ -72,13 +134,13 @@ def getOS():
         os = 'linux'
     elif (system == 'darwin'):
         os = 'MacOS'
-    elif (system in ['win32', 'win64']):
-        os = 'Windows'
     else:
-        raise Exception('Unsupported OS - Closing Program')
+        print('Unsupported OS - Closing Program')
+        sys.exit()
 
     return os
 
 
 if __name__ == '__main__':
-    run()
+    while True:
+        run()
