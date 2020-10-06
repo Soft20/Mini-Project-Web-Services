@@ -60,19 +60,29 @@ npm install -g yarn
 ```
 
 **Client**
-* [python](https://www.python.org/)
-* [inquirer](https://pypi.org/project/inquirer/)
-* [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
+* [Python3](https://www.python.org/downloads/)
 
 ## Installation
-
 **Server**
 ```bash
 yarn install
 ```
 
-**Client**  
-This solution only needs the libraries install from the [Prerequisite](#prerequisite) above.
+**Client**
+[inquirer](https://pypi.org/project/inquirer/)
+```bash
+pip install inquirer
+```
+
+[beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
+```bash
+pip install beautifulsoup4
+```
+
+[lxml](https://pypi.org/project/lxml/)
+```bash
+pip install lxml
+```
 
 ## Execution
 `ctr + c` to terminate services.
