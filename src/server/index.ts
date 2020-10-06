@@ -6,7 +6,6 @@ const app = express();
 const PORT: number = 3020;
 // const BASE_URL: string = `https://calculator.adamlass.com`;
 const BASE_URL: string = `http://localhost:${PORT}`;
-// const _links = [`${BASE_URL}/add`, `${BASE_URL}/subtract`, `${BASE_URL}/multiply`, `${BASE_URL}/divide`, `${BASE_URL}/favorite`];
 
 const _links: Object = {
 	favorite: [

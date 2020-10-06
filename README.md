@@ -30,11 +30,11 @@ Prepare demonstration of the implementation.
 ### Summary
 This project consist of a REST server written in TypeScript, and a client written in python.
 
-The client uses our own REST Web Service and an external SOAP Web Service. The client can request different calculation operations to both services, where both response with and answer.
+The client uses our own REST Web Service and an external SOAP Web Service. The client can request different calculation operations to both services, where both response with an answer.
 
-The REST Service also returns a list of all available urls as an attribute called `links`.
+The REST Service also returns a list of all available URLs as an attribute called `_links`.
 
-We selected Python and TypeScript to show the usage and integration between multiple programing languages. 
+We selected Python and TypeScript to show the usage and integration between multiple programming languages. 
 
 
 ### Business Case
@@ -48,23 +48,23 @@ The following operations are available:
 * `Multiply`
 * `Divide`
 
-As an extension our REST service provides an endpoint for making CRUD operations for handling your favorite number. This is done by using the URI: `\favorite` with the http methods `GET`, `POST`, `PUT` & `DELETE`.
+As an extension, our REST service provides an endpoint for making CRUD operations for handling your favorite number. This is done by using the URI: `\favorite` with the HTTP methods `GET`, `POST`, `PUT` & `DELETE`.
 
 ### RESTfulness
 
 #### Architectural Constraints
 
 - [x] Client-server architecture  
-Server and client are separated and connected with the servers api.
+Server and client are separated and connected with the server's API.
 
 - [x] Statelessness  
-The server is stateless, the client cant store any content the server. Our server uses a json file as a proxy database to avoid storing content on the server.
+The server is stateless, the client can't store any content on the server. Our server uses a JSON file as a proxy database to avoid storing content on the server.
 
 - [x] Cacheability  
 This can be obtained though the response header `Cache-control`.
 
 - [x] Layered system  
-Not a part of our business case, the could be solve by calling the SOAP service through our own server. This helps the consumer by only using one web service.
+Not a part of our business case, this could be solved by calling the SOAP service through our own server. This helps the consumer by only using one web service.
 
 - [ ] Code on demand (optional)  
 _Not a part of our business case._
@@ -74,10 +74,10 @@ _Not a part of our business case._
 Our URIs identifies the targeted resource.
 
 - [x] Resource manipulation through representations  
-Our `/favorite` uri consist of the four CRUD operations as http methods `GET`, `POST`, `PUT` & `DELETE`.
+Our `/favorite` uri consists of the four CRUD operations as HTTP methods `GET`, `POST`, `PUT` & `DELETE`.
 
 - [x] Self-descriptive messages  
-For each response a Self-descriptive message is provided to the client for better understanding.
+For each response a self-descriptive message is provided to the client for better understanding.
 
 - [x] Hypermedia as the engine of application state (HATEOAS)  
 Our response contains a list called `_links` containing available URIs. Our use case wasn't the best for showing the feature. A better use case could be a movie service, where a movies could link to the actors in it, and actors could link to the movies they have acted in.
@@ -112,7 +112,7 @@ response = {
 * [node.js](https://nodejs.org/en/)
 * [yarn](https://www.npmjs.com/package/yarn)
 
-`Node.js` comes with a package manager called `npm`, we uses a optimized version called `yarn` which can be installed uses `npm` as seen below.
+`Node.js` comes with a package manager called `npm`, we use an optimized version called `yarn` which can be installed using `npm` as seen below.
 
 ```bash
 npm install -g yarn
